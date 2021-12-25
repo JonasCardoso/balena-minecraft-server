@@ -10,7 +10,8 @@ get_latest_server() {
   printf "%s\n" "Downloading $MC_VERSION build $LATEST_BUILD..."
 
   echo "$SERVER_JAR_SHA256 paper.jar" > papersha256.txt
-  wget --quiet -O paper.jar -T 60 $SERVER_JAR_URL
+  wget --quiet -O paper.jar $SERVER_JAR_URL
+  cp paper.jar serverfiles
 }
 
 # Declare some constants
@@ -82,7 +83,7 @@ if [[ -z "$ENABLE_UPDATE" ]]; then
     printf "%s\n" "Found a valid server file. It's called: $(ls *.jar). Use ENABLE_UPDATE to update."
   fi
 else
-  # Force paper jar updating
+## Force paper jar updating
   printf "%s\n" "Forcing server update"
   get_latest_server
 fi
